@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import img1 from "../images/img.svg"
 import e1 from "../images/e1.svg"
 import fb from "../images/fb.svg"
@@ -7,10 +7,15 @@ import Image from "next/image";
 import mail from "../images/mail.svg"
 import password from "../images/password.svg"
 import eye from "../images/eye.svg"
-const LoginPanel = () => {
+const LoginPanel = ({login,setLogin}) => {
+    
+    const handleclick = ()=>{
+        setLogin(!login)
+    }
+
  return(
-   <div className="w-full h-full">
-        <div className="flex flex-col py-[12%]">
+   <div className={`w-full h-full  ${!login?" hidden":" "}`}>
+        <div className="flex flex-col py-[13%]">
             <div className="flex flex-col px-[10%]">
                 <label className=" text-black font-koulen text-3xl">log in to your account</label>
                 <label className=" text-[#938888] font-koulen text-sm/3">welcome back! select method to log in:</label>
@@ -47,8 +52,8 @@ const LoginPanel = () => {
                     <div className="w-[80%] h-[3.4rem] bg-[#722FA6] hover:bg-purple-900 flex items-center justify-center py-2 font-koulen text-2xl rounded-sm">
                         <label className="">LOG IN</label>
                     </div>
-                    <div className="w-[80%] font-koulen flex justify-center">
-                        <label className="text-[#938888]">Don’t have an account? <span className="text-[#722FA6]">create an anccount</span></label>
+                    <div className="w-[80%] font-koulen flex justify-center hover:cursor-pointer" onClick={handleclick}>
+                        <label className="text-[#938888]">Don’t have an account? <span className="text-[#722FA6]" >create an anccount</span></label>
                     </div>
                 </form>
         </div>

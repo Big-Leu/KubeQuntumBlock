@@ -7,7 +7,11 @@ import Image from "next/image";
 import mail from "../images/mail.svg"
 import password from "../images/password.svg"
 import eye from "../images/eye.svg"
-const SignupPanel = () => {
+const SignupPanel = ({login,setLogin}) => {
+
+    const handleclick = ()=>{
+        setLogin(!login)
+    }
  return(
    <div className="w-full h-full">
         <div className="flex flex-col py-[6%]" >
@@ -44,6 +48,9 @@ const SignupPanel = () => {
                     </div>
                     <div className="w-[80%] h-[3.4rem] bg-[#722FA6] hover:bg-purple-900 flex items-center justify-center py-2 font-koulen text-2xl rounded-sm">
                         <label className="">submit</label>
+                    </div>
+                    <div className="text-[#722FA6] font-koulen flex  justify-center">
+                        <label className="mr-[6rem]" onClick={handleclick}>already have an account?</label>
                     </div>
                 </form>
         </div>
