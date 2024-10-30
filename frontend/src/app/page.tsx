@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Login from "../app/components/loginpage"
-export default function Home() {
+import Home from "../app/home/page"
+import Card from "../app/components/box"
+export default function APP() {
   return (
-    <Login/>
+    // <Card/>
+    <Home/>
   );
 }
