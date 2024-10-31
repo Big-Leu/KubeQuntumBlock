@@ -2,7 +2,7 @@ import Card from "../components/box"
 import { cardsData } from "../components/data";
 export default function Home() {
   return (
-    <div className=" relative w-screen h-screen flex justify-center overflow-hidden">
+    <div className=" relative w-screen h-screen flex justify-center items-center overflow-hidden">
       <div className="z-10">
         <div className="flex flex-row space-x-9 mt-[3rem] justify-center">
           <h1 className="font-koulen text-6xl">Project</h1>

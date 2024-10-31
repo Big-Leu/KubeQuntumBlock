@@ -1,9 +1,9 @@
-import { api } from "../components/data";
+import { api1 } from "../components/data";
 import { useState } from "react";
 import Image from "next/image";
 import close1 from "../images/close.svg"
-export default function Form() {
-    const [formData, setFormData] = useState(api[0]);
+export default function Form({index}) {
+    const [formData, setFormData] = useState(api1[index]);
     const handleFormClose = () => {
         window.location.href = '/home';
       };
@@ -12,7 +12,7 @@ export default function Form() {
         setFormData({ ...formData, [name]: value });
       };
     return (
-      <div className=" absolute top-[20%] left-[35%]  w-[70vh] h-auto backdrop-blur-md rounded-sm">
+      <div className=" absolute top-[20%] left-[35%]  w-[70vh] h-auto backdrop-blur-md rounded-md">
             <form className=" font-koulen flex flex-col px-[2rem] space-y-[2rem] py-6 rounded-sm overflow-y-auto max-h-[70vh] scrollbar-none ">
                 <div className="flex flex-row justify-between " >
                     <h1 className="text-white text-4xl">List the  Pods</h1>
