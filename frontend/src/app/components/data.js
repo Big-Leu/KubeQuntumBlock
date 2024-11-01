@@ -13,7 +13,7 @@ export const cardsData = [
     para: "Retrieve a list of all running pods in the cluster. Filter results based on namespace, labels, or status to view specific sets of pods.",
     form: 0,
     api: "/getPods",
-    method: "GET"
+    method: "GET",
   },
   {
     title: "Create Pod",
