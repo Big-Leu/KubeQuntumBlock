@@ -2,7 +2,7 @@
 import { use, useEffect, useState } from "react";
 import Form from "../components/form"
 import Image from "next/image";
-export default function Card({title,image,para,form}) {
+export default function Card({title,image,para,form,api,method}) {
 
     const [visible,setVisible] = useState(false);
     const handleclick = ()=>{
@@ -14,7 +14,7 @@ export default function Card({title,image,para,form}) {
         <Image src={image} alt="image"/>
         <label className="font-semibold">{title} </label>
         <p className="max-w-[395px] px-[2rem] font-thin text-sm/normal">{para} </p>
-        {visible && <Form index={form}/>}
+        {visible && <Form index={form} api={api} method={method}/>}
       </div>
     );
   }

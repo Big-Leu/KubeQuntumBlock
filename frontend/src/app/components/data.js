@@ -8,40 +8,53 @@ import ing from "../images/ing.svg";
 
 export const cardsData = [
   {
+    title: "List Pods",
+    image: vol,
+    para: "Retrieve a list of all running pods in the cluster. Filter results based on namespace, labels, or status to view specific sets of pods.",
+    form: 0,
+    api: "/getPods",
+    method: "GET"
+  },
+  {
     title: "Create Pod",
     image: pod,
     para: "Provision a new pod in the cluster. Define specifications for containers, resources, and environment variables dynamically to meet deployment needs.",
-    form: 0,
+    form: 1,
+    api: "/createPod",
+    method: "POST"
+
   },
   {
     title: "Delete Pod",
     image: svc,
     para: "Safely remove a pod from the cluster. Includes options for graceful termination or forceful deletion based on pod status and dependencies.",
-    form: 1,
+    form: 2,
+    api: "/deletepod",
+    method: "DELETE"
   },
   {
     title: "Patch Pod",
     image: user,
     para: "Update specific fields of an existing pod without redeployment. Apply changes to configurations or labels to modify pod behavior in real-time.",
-    form: 1,
-  },
-  {
-    title: "List Pods",
-    image: vol,
-    para: "Retrieve a list of all running pods in the cluster. Filter results based on namespace, labels, or status to view specific sets of pods.",
-    form: 1,
+    form: 3,
+    api: "/patchpod",
+    method: "PATCH"
   },
   {
     title: "Pod Logs",
     image: ing,
     para: "Access logs of individual pods to monitor activity and troubleshoot issues. Choose container-specific logs within multi-container pods for detailed analysis.",
-    form: 1,
+    form: 2,
+    api: "/getLogs",
+    method: "PATCH"
   },
   {
     title: "Execute Command",
     image: api,
     para: "Run commands inside a specific pod container for debugging and maintenance. Provides real-time access to manage or inspect pod-level operations.",
-    form: 2,
+    form: 4,
+    api: "/addEndpoint",
+    method: "POST"
   }
 ];
 
@@ -51,17 +64,39 @@ export const cardsData = [
     },
     {
       podname: "my-pod",
-      namespace: "default",
       containername: "nginx-container",
       image: "nginx:latest"
-    }, 
+    },
+    {
+      podname: "my-pod"
+    },
+    {
+      podname: "my-pod",
+      podimage: "nginx:1.25.4"
+    },
     {
       "podname": "flask-backend-6cbb9fc588-ss8x7",
-      "namespace": "default",
       "containername": "flask-backend-deployment",
       "endpoint": "get",
       "functionname": "list_user",
       "route": "/getusers",
   "functionbody": "try:\\n    users = self.session.query(UserSignUP).all()\\n    if not users:\\n        return {\"message\": \"No users found\"}, 404\\n    return [user.to_dict() for user in users]\\nexcept Exception as exception:\\n    return {\"message\": f\"Error retrieving users: {str(exception)}\"}"
   },    
+  ];
+
+ export const podsData = [
+    {
+      name: "flask-backend-6cbb9fc588-ss8x7",
+      containers: [
+        { name: "flask-backend-deployment", image: "bigeu007/backend:v5" }
+      ],
+      status: "Running",
+    },
+    {
+      name: "node-frontend-ccb46898-cbm2g",
+      containers: [
+        { name: "node-frontend-deployment", image: "bigleu007/frontend:v2" }
+      ],
+      status: "Running",
+    }
   ];
