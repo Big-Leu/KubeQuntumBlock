@@ -60,7 +60,7 @@ const LoginPanel = ({login,setLogin}) => {
     }
 
  return(
-   <div className={`w-full h-full  ${!login?" hidden":" "}`}>
+   <div className={`w-full h-full overflow-hidden ${!login?" hidden":" "}`}>
         <div className="flex flex-col py-[13%]">
             <div className="flex flex-col px-[10%]">
                 <label className=" text-black font-koulen text-3xl">log in to your account</label>
