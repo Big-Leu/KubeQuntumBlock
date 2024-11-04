@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from 'next/router';
-import img1 from "../images/img.svg"
+import github from "../images/git2.png"
 import e1 from "../images/e1.svg"
 import fb from "../images/fb.svg"
 import Image from "next/image";
@@ -49,6 +48,13 @@ const LoginPanel = ({login,setLogin}) => {
         console.error('Error:', error);
       }
     };
+    const handleGitHub = () => {
+      try {
+        window.location.href = "http://localhost:8080/auth/github"
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
     const handleclick = ()=>{
         setLogin(!login)
     }
@@ -65,7 +71,7 @@ const LoginPanel = ({login,setLogin}) => {
                     <Image src={e1} alt="google logo"  onClick={handleGoogle}/>
                 </div>
                 <div className=" w-[30%] rounded-sm py-1 flex justify-center items-center bg-slate-100 hover:bg-slate-100 drop-shadow-xl shadow-black hover:scale-110">
-                    <Image src={fb} alt="facebook logo" />
+                    <Image src={github} alt="facebook logo" onClick={handleGitHub}/>
                 </div>
             </div>
             <div className="relative px-[10%] pt-[5%]">
