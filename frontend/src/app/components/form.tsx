@@ -24,6 +24,7 @@ export default function Form({ index, api, method }) {
       requestOptions = {
         ...requestOptions,
         headers: { "Content-Type": "application/json" },
+        credentials: 'include',
         body: method === "GET" ? undefined : JSON.stringify(formData),
       };
     }

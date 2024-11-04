@@ -27,6 +27,7 @@ const LoginPanel = ({login,setLogin}) => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify({ email, password }),
         });
   
@@ -37,6 +38,13 @@ const LoginPanel = ({login,setLogin}) => {
         } else {
           console.error('Login Failed');
         }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    const handleGoogle = () => {
+      try {
+        window.location.href = "http://localhost:8080/auth/google"
       } catch (error) {
         console.error('Error:', error);
       }
@@ -54,7 +62,7 @@ const LoginPanel = ({login,setLogin}) => {
             </div>
             <div className=" flex  px-[10%] pt-[3%] space-x-4">
                 <div className=" w-[30%] rounded-sm py-1 flex justify-center items-center bg-slate-50 hover:bg-slate-100 drop-shadow-xl shadow-black hover:scale-110">
-                    <Image src={e1} alt="google logo" />
+                    <Image src={e1} alt="google logo"  onClick={handleGoogle}/>
                 </div>
                 <div className=" w-[30%] rounded-sm py-1 flex justify-center items-center bg-slate-100 hover:bg-slate-100 drop-shadow-xl shadow-black hover:scale-110">
                     <Image src={fb} alt="facebook logo" />

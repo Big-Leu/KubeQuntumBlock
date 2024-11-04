@@ -7,7 +7,8 @@ import Data from "../app/components/dataShow"
 export default function APP() {
   return (
     // <Card/>
-    <Home/>
+    // <Home/>
+    <Login/>
     // <Data/>
   );
 }
