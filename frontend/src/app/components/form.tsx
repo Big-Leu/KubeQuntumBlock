@@ -4,7 +4,7 @@ import Image from "next/image";
 import close1 from "../images/close.svg";
 import Data from "../components/dataShow";
 
-export default function Form({ index, api, method }) {
+export default function Form({ index, api, method, title }) {
   const URL = "http://localhost:8080";
   const [data, setData] = useState(null);
   const [formData, setFormData] = useState(api1[index]);
@@ -58,7 +58,7 @@ export default function Form({ index, api, method }) {
         onSubmit={sendData}
       >
         <div className="flex flex-row justify-between">
-          <h1 className="text-white text-4xl">List the Pods</h1>
+          <h1 className="text-white text-4xl">{title}</h1>
           <Image
             src={close1}
             alt="close"

@@ -14,7 +14,7 @@ export default function Card({title,image,para,form,api,method}) {
         <Image src={image} alt="image"/>
         <label className="font-semibold">{title} </label>
         <p className="max-w-[395px] px-[2rem] font-thin text-sm/normal">{para} </p>
-        {visible && <Form index={form} api={api} method={method}/>}
+        {visible && <Form index={form} api={api} method={method} title={title}/>}
       </div>
     );
   }

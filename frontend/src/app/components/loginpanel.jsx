@@ -14,6 +14,7 @@ const LoginPanel = ({login,setLogin}) => {
     //     const router = useRouter();
     //     setRouter(router)
     // },[])
+    const URL = "http://localhost:8080";
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   
@@ -21,7 +22,7 @@ const LoginPanel = ({login,setLogin}) => {
       e.preventDefault(); // Prevent the page from refreshing
   
       try {
-        const response = await fetch('http://localhost:8080/login', {
+        const response = await fetch(`${URL}/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -43,14 +44,14 @@ const LoginPanel = ({login,setLogin}) => {
     };
     const handleGoogle = () => {
       try {
-        window.location.href = "http://localhost:8080/auth/google"
+        window.location.href = `${URL}/auth/google`
       } catch (error) {
         console.error('Error:', error);
       }
     };
     const handleGitHub = () => {
       try {
-        window.location.href = "http://localhost:8080/auth/github"
+        window.location.href = `${URL}/auth/github`
       } catch (error) {
         console.error('Error:', error);
       }
