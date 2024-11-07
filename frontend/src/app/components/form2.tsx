@@ -5,7 +5,7 @@ import close1 from "../images/close.svg";
 import Data from "../components/dataShow";
 import {FormStore} from "@/store/user"
 
-export default function Form({ index, api, method, title }) {
+export default function Form2({ index, api, method, title }) {
   const URL = "http://localhost:8080";
   const [data, setData] = useState(null);
   const [formData, setFormData] = useState(api1[index]);
@@ -14,6 +14,8 @@ export default function Form({ index, api, method, title }) {
 
   const sendData = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    // Check if we need to send data as query parameters (for PATCH and DELETE)
     let endpoint = `${URL}${api}`;
     let requestOptions: RequestInit = { method };
 
@@ -48,9 +50,7 @@ export default function Form({ index, api, method, title }) {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
- const handleClick = () => {
-  window.location.href = '/home';
- }
+
   return (
     <div className="absolute top-[20%] left-[35%] w-[70vh] h-auto backdrop-blur-md rounded-md">
       <form
@@ -63,32 +63,11 @@ export default function Form({ index, api, method, title }) {
             src={close1}
             alt="close"
             className="transition-all duration-300 hover:rotate-45"
-            onClick={handleClick}
+            onClick={()=>{
+              toggleVisibility;}
+              }
           />
         </div>
-        {Object.entries(formData).map(([key, value]) => (
-          <div key={key}>
-            <label htmlFor={key}>{key}</label>
-            {key === "functionbody" ? (
-              <textarea
-                id={key}
-                name={key}
-                placeholder={value as string}
-                onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded-md text-black focus:outline-none w-full h-32 resize-none"
-              />
-            ) : (
-              <input
-                type="text"
-                id={key}
-                name={key}
-                placeholder={value as string}
-                onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded-md text-black focus:outline-none w-full"
-              />
-            )}
-          </div>
-        ))}
         <button
           className="w-auto bg-purple-800 rounded-sm text-3xl py-2 hover:bg-purple-900"
           type="submit"

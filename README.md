@@ -30,6 +30,7 @@ The application leverages the Kubernetes API through Golang, offering seamless a
 ![Login](/frontend/image/2.png)
 - **JWT Token Authentication**: Secures API access with JSON Web Tokens.
 
+## 1. Dashboard
 ![dashboard](/frontend/image/dashboard.png)
 
 ### 2. Pod Management

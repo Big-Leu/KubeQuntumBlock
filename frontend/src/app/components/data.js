@@ -49,9 +49,19 @@ export const cardsData = [
     method: "PATCH"
   },
   {
-    title: "Execute Command",
+    title: "Save the Endpoints",
     image: api,
     para: "Run commands inside a specific pod container for debugging and maintenance. Provides real-time access to manage or inspect pod-level operations.",
+    form: 4,
+    api: "/addEndpoint",
+    method: "POST"
+  },
+];
+export const FunctionData = [
+ {
+    title: "Test the Endpoint Command",
+    image: g1,
+    para: "Run commands inside a specific pod container to test the endpoints. This allows real-time validation and inspection of the application's behavior and performance at the pod level.",
     form: 4,
     api: "/addEndpoint",
     method: "POST"
@@ -80,7 +90,7 @@ export const cardsData = [
       "endpoint": "get",
       "functionname": "list_user",
       "route": "/getusers",
-  "functionbody": "try:\\n    users = self.session.query(UserSignUP).all()\\n    if not users:\\n        return {\"message\": \"No users found\"}, 404\\n    return [user.to_dict() for user in users]\\nexcept Exception as exception:\\n    return {\"message\": f\"Error retrieving users: {str(exception)}\"}"
+      "functionbody": "try:\\n    users = self.session.query(UserSignUP).all()\\n    if not users:\\n        return {\"message\": \"No users found\"}, 404\\n    return [user.to_dict() for user in users]\\nexcept Exception as exception:\\n    return {\"message\": f\"Error retrieving users: {str(exception)}\"}"
   },    
   ];
 
