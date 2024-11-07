@@ -1,61 +1,47 @@
 import { api1 } from "../components/data";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Image from "next/image";
 import close1 from "../images/close.svg";
 import Data from "../components/dataShow";
 import {FormStore} from "@/store/user"
 
 export default function Form2({ index, api, method, title }) {
+
+
+  const { fetchEndData, EndData } = FormStore();
+  useEffect(() => {
+    fetchEndData();
+  }, [fetchEndData]);
+  console.log("the data is there:=",EndData)
   const URL = "http://localhost:8080";
+  const URL2 = "http://localhost:5000";
   const [data, setData] = useState(null);
-  const [formData, setFormData] = useState(api1[index]);
-  console.log(api1[index]);
-  const toggleVisibility = FormStore((state: any) => state.toggleVisibility);
 
-  const sendData = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    // Check if we need to send data as query parameters (for PATCH and DELETE)
-    let endpoint = `${URL}${api}`;
-    let requestOptions: RequestInit = { method };
-
-    if (method === "PATCH" || method === "DELETE") {
-      const queryParams = new URLSearchParams(formData).toString();
-      endpoint += `?${queryParams}`;
-    } else {
-      // For GET and POST, send JSON body data
-      requestOptions = {
-        ...requestOptions,
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
-        body: method === "GET" ? undefined : JSON.stringify(formData),
-      };
-    }
-
+  const handleExecute = async () => {
     try {
-      const response = await fetch(endpoint, requestOptions);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      setData(result);
+      const response = await fetch(`${URL2}/getusers`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await response.json();
+      console.log(data);
+      setData(data);
     } catch (error) {
-      console.error("Error with the request:", error);
+      console.error(error);
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
+  const handleClick = () => {
+    window.location.href = '/home';
+   }
 
   return (
     <div className="absolute top-[20%] left-[35%] w-[70vh] h-auto backdrop-blur-md rounded-md">
-      <form
+      <div
         className="font-koulen flex flex-col px-[2rem] space-y-[2rem] py-6 rounded-sm overflow-y-auto max-h-[70vh] scrollbar-none"
-        onSubmit={sendData}
       >
         <div className="flex flex-row justify-between" >
           <h1 className="text-white text-4xl">{title}</h1>
@@ -63,17 +49,20 @@ export default function Form2({ index, api, method, title }) {
             src={close1}
             alt="close"
             className="transition-all duration-300 hover:rotate-45"
-            onClick={()=>{
-              toggleVisibility;}
-              }
+            onClick={handleClick}
           />
         </div>
-        <button
-          className="w-auto bg-purple-800 rounded-sm text-3xl py-2 hover:bg-purple-900"
-          type="submit"
-        >
-          Submit
-        </button>
+        {EndData.map((data, index) => (
+          <div key={index} >
+            <div className="flex justify-between text-xl">
+              <label>{data.EndpointType}</label>
+              <label>{data.EndpointName}</label>
+            </div>
+            <div className="flex justify-center">
+             <button className="bg-emerald-400 py-2 px-4 rounded-md text-xl w-full mt-3" onClick={handleExecute}>Execute</button>
+            </div>
+          </div>
+        ))}
         {data && (
             index === 3 ? (
                 <pre className="text-white mt-4 bg-gray-800 p-4 rounded h-auto font-koulen">
@@ -88,7 +77,7 @@ export default function Form2({ index, api, method, title }) {
                     ></p>
             )
         )}
-      </form>
+      </div>
     </div>
   );
 }

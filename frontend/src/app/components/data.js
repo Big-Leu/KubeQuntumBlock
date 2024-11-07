@@ -85,12 +85,12 @@ export const FunctionData = [
       podimage: "nginx:1.25.4"
     },
     {
-      "podname": "flask-backend-6cbb9fc588-ss8x7",
-      "containername": "flask-backend-deployment",
-      "endpoint": "get",
-      "functionname": "list_user",
-      "route": "/getusers",
-      "functionbody": "try:\\n    users = self.session.query(UserSignUP).all()\\n    if not users:\\n        return {\"message\": \"No users found\"}, 404\\n    return [user.to_dict() for user in users]\\nexcept Exception as exception:\\n    return {\"message\": f\"Error retrieving users: {str(exception)}\"}"
+      podname: "flask-backend-6cbb9fc588-ss8x7",
+      containername: "flask-backend-deployment",
+      endpoint: "get",
+      functionname: "list_user",
+      route: "/getusers",
+      functionbody: "try:\\n    users = self.session.query(UserSignUP).all()\\n    if not users:\\n        return {\"message\": \"No users found\"}, 404\\n    return [user.to_dict() for user in users]\\nexcept Exception as exception:\\n    return {\"message\": f\"Error retrieving users: {str(exception)}\"}"
   },    
   ];
 

@@ -1,16 +1,18 @@
 import { api1 } from "../components/data";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Image from "next/image";
 import close1 from "../images/close.svg";
-import Data from "../components/dataShow";
 import {FormStore} from "@/store/user"
 
 export default function Form({ index, api, method, title }) {
   const URL = "http://localhost:8080";
   const [data, setData] = useState(null);
   const [formData, setFormData] = useState(api1[index]);
-  console.log(api1[index]);
-  const toggleVisibility = FormStore((state: any) => state.toggleVisibility);
+  const { fetchPodsData, podsData } = FormStore();
+  useEffect(() => {
+    fetchPodsData();
+  }, [fetchPodsData]);
+
 
   const sendData = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -20,8 +22,11 @@ export default function Form({ index, api, method, title }) {
     if (method === "PATCH" || method === "DELETE") {
       const queryParams = new URLSearchParams(formData).toString();
       endpoint += `?${queryParams}`;
+      requestOptions = {
+        ...requestOptions,
+        credentials: 'include',
+      };
     } else {
-      // For GET and POST, send JSON body data
       requestOptions = {
         ...requestOptions,
         headers: { "Content-Type": "application/json" },
@@ -78,14 +83,44 @@ export default function Form({ index, api, method, title }) {
                 className="p-2 border border-gray-300 rounded-md text-black focus:outline-none w-full h-32 resize-none"
               />
             ) : (
-              <input
-                type="text"
-                id={key}
-                name={key}
-                placeholder={value as string}
-                onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded-md text-black focus:outline-none w-full"
-              />
+              key === "podname" && index !== 1? (
+                podsData && (
+                  <select id="pod-select"
+                  name={key}
+                  onChange={handleInputChange}
+                  className="flex flex-row w-full focus:outline-none font-koulen text-black py-2 rounded-md px-3">
+                    {podsData.map((item, index) => (
+                      <option key={index} value={item.podName}>
+                        {item.podName}
+                      </option>
+                    ))}
+                  </select>
+                )
+                ) : (
+                  key === "containername" && index !== 1? (
+                    podsData && (
+                      <select id="container-select"
+                      name={key}
+                      onChange={handleInputChange}
+                      className="flex flex-row w-full focus:outline-none font-koulen text-black py-2 rounded-md px-3">
+                        {podsData.map((item, index) => (
+                          <option key={index} value={item.podName}>
+                            {item.containerName}
+                          </option>
+                        ))}
+                      </select>
+                    )
+                    ) : (
+                    <input
+                      type="text"
+                      id={key}
+                      name={key}
+                      placeholder={value as string}
+                      onChange={handleInputChange}
+                      className="p-2 border border-gray-300 rounded-md text-black focus:outline-none w-full"
+                    />
+                  )
+                )
             )}
           </div>
         ))}

@@ -1,6 +1,7 @@
 "use client"
 import Card from "../components/box"
 import { cardsData,FunctionData } from "../components/data";
+import { FormStore } from '@/store/user';
 export default function Home() {
 
 const handleLogout = async () => {
