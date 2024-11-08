@@ -5,9 +5,13 @@ import close1 from "../images/close.svg";
 import Data from "../components/dataShow";
 import {FormStore} from "@/store/user"
 
-export default function Form2({ index, api, method, title }) {
+export default function Form2({ index, api, method, title , isVisible, setVisible}) {
 
-
+  const handleClick = (event: any) => {
+    event.stopPropagation();
+    console.log(isVisible)
+    setVisible(false)
+  }
   const { fetchEndData, EndData } = FormStore();
   useEffect(() => {
     fetchEndData();
@@ -24,7 +28,6 @@ export default function Form2({ index, api, method, title }) {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
       });
       const data = await response.json();
       console.log(data);
@@ -34,9 +37,6 @@ export default function Form2({ index, api, method, title }) {
     }
   };
 
-  const handleClick = () => {
-    window.location.href = '/home';
-   }
 
   return (
     <div className="absolute top-[20%] left-[35%] w-[70vh] h-auto backdrop-blur-md rounded-md">
